@@ -1034,6 +1034,11 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
+	  HAL_ADC_Start(&hadc1);
+	  HAL_ADC_PollForConversion(&hadc1, 10);
+	  int16_t joystickX = HAL_ADC_GetValue(&hadc1);
+	  osMessageQueuePut(Queue1Handle, &joystickX, 0, 10);
+	  osDelay(100);
 
   }
   /* USER CODE END 5 */
